@@ -15,14 +15,14 @@ export const handleSignupSuccess = (
   state: StateShape,
   action: authTypes.SignupSuccess,
 ): StateShape => {
-  return { ...shared.handleActionSuccess(state, action), jwt: action.data.jwt };
+  return { ...shared.handleActionSuccess(state, action), jwt: action.data.jwt || '' };
 };
 
 export const handleSigninSuccess = (
   state: StateShape,
   action: authTypes.SigninSuccess,
 ): StateShape => {
-  return { ...shared.handleActionSuccess(state, action), jwt: action.data.jwt };
+  return { ...shared.handleActionSuccess(state, action), jwt: action.data.jwt || '' };
 };
 
 export const reducer = (

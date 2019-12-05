@@ -15,7 +15,7 @@ export interface SignupFailure extends shared.ActionFailure {
 
 export interface SignupSuccess extends shared.ActionSuccess {
   type: typeof SIGNUP_SUCCESS;
-  data: StateShape;
+  data: Partial<StateShape>;
 }
 
 export const SIGNIN_START = 'SIGNIN_START';
@@ -32,9 +32,7 @@ export interface SigninFailure extends shared.ActionFailure {
 
 export interface SigninSuccess extends shared.ActionSuccess {
   type: typeof SIGNIN_SUCCESS;
-  data: {
-    jwt: string;
-  };
+  data: Partial<StateShape>;
 }
 
 export type ActionTypes =

@@ -13,7 +13,7 @@ export const signupFailure = (error: Error): authTypes.SignupFailure => ({
   error,
 });
 
-export const signupSuccess = (data: authService.SigninResponse): authTypes.SigninSuccess => ({
+export const signupSuccess = (data: authService.SignupResponse): authTypes.SigninSuccess => ({
   type: authTypes.SIGNIN_SUCCESS,
   data,
 });
