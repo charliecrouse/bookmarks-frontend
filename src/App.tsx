@@ -1,7 +1,6 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { GlobalState } from './store';
 import { signin } from './store/actions/auth';
 
 interface PropShape {}
@@ -9,13 +8,8 @@ interface PropShape {}
 export const App: React.FC<PropShape> = props => {
   const dispatch = useDispatch();
 
-  useSelector((state: GlobalState) => ({
-    auth: state.auth,
-    bookmarks: state.bookmarks,
-  }));
-
-  const email: string = 'test@test.com';
-  const password: string = 'password';
+  const email = 'test@test.com';
+  const password = 'password';
 
   React.useEffect(() => {
     dispatch(signin({ email, password }));

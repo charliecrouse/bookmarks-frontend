@@ -1,37 +1,15 @@
-import * as shared from './shared';
-import * as bookmarksTypes from '../actions/types/bookmarks';
+import { createSlice } from '@reduxjs/toolkit';
 
-import { Bookmark } from '../../services/bookmarks';
+import { AsyncState, defaultAsyncState } from '../common/state';
 
-export interface StateShape extends shared.AsyncStateShape {
-  bookmarks: Bookmark[];
-}
+export interface StateShape extends AsyncState {}
 
-const initialState = {
-  bookmarks: [],
-  loading: false,
-  error: undefined,
+export const initialState: StateShape = {
+  ...defaultAsyncState,
 };
 
-export const handleFetchBookmarksSuccess = (
-  state: StateShape,
-  action: bookmarksTypes.FetchBookmarksSuccess,
-): StateShape => {
-  return { ...shared.handleActionSuccess(state, action), bookmarks: action.data.bookmarks || [] };
-};
-
-export const reducer = (
-  state: StateShape = initialState,
-  action: bookmarksTypes.ActionTypes,
-): StateShape => {
-  switch (action.type) {
-    case bookmarksTypes.FETCH_BOOKMARKS_START:
-      return shared.handleActionStart(state) as StateShape;
-    case bookmarksTypes.FETCH_BOOKMARKS_FAILURE:
-      return shared.handleActionFailure(state, action) as StateShape;
-    case bookmarksTypes.FETCH_BOOKMARKS_SUCCESS:
-      return handleFetchBookmarksSuccess(state, action);
-    default:
-      return state;
-  }
-};
+export const { reducer, actions } = createSlice({
+  name: 'bookmarks',
+  initialState,
+  reducers: {},
+});

@@ -1,21 +1,17 @@
 import thunk from 'redux-thunk';
-
-import { applyMiddleware, combineReducers, createStore } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers } from 'redux';
 
 import { reducer as auth } from './reducers/auth';
 import { reducer as bookmarks } from './reducers/bookmarks';
 
-export const rootReducer = combineReducers({
+const reducer = combineReducers({
   auth,
   bookmarks,
 });
 
-export type GlobalState = ReturnType<typeof rootReducer>;
+const middleware = [thunk];
 
-export const initStore = () => {
-  const middlewares = [thunk];
-  const middlwareEnhancer = applyMiddleware(...middlewares);
+export const store = configureStore({ reducer, middleware });
 
-  return createStore(rootReducer, composeWithDevTools(middlwareEnhancer));
-};
+export type GlobalStore = ReturnType<typeof reducer>;
