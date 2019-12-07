@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import * as authService from '../../services/auth';
 import { AsyncState, defaultAsyncState } from '../common/state';
-import { handleActionStart, handleActionError, handleActionSuccess } from '../common/reducers';
+import { handleActionStart, handleActionFailure, handleActionSuccess } from '../common/reducers';
 
 export interface StateShape extends AsyncState {
   jwt: string;
@@ -12,23 +13,18 @@ export const initialState: StateShape = {
   jwt: '',
 };
 
-export interface SignupSuccess {
-  jwt: string;
-}
-
-export interface SigninSuccess {
-  jwt: string;
-}
-
 export const { reducer, actions } = createSlice({
   name: 'auth',
   initialState,
   reducers: {
     signupStart: handleActionStart<StateShape>(),
-    signupFailure: handleActionError<StateShape>(),
-    signupSuccess: handleActionSuccess<StateShape, SignupSuccess>(),
+    signupFailure: handleActionFailure<StateShape>(),
+    signupSuccess: handleActionSuccess<StateShape, authService.SignupResponse>(),
     signinStart: handleActionStart<StateShape>(),
-    signinFailure: handleActionError<StateShape>(),
-    signinSuccess: handleActionSuccess<StateShape, SigninSuccess>(),
+    signinFailure: handleActionFailure<StateShape>(),
+    signinSuccess: handleActionSuccess<StateShape, authService.SigninResponse>(),
+    loadAuthenticationStart: handleActionStart<StateShape>(),
+    loadAuthenticationFailure: handleActionFailure<StateShape>(),
+    loadAuthenticationSuccess: handleActionSuccess<StateShape, authService.SigninResponse>(),
   },
 });

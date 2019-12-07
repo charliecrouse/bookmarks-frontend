@@ -1,23 +1,24 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { signin } from './store/actions/auth';
+import { GlobalStore } from './store';
+import { loadAuthentication } from './store/actions/auth';
 
-interface PropShape {}
+import { AuthForm } from './components/AuthForm';
 
-export const App: React.FC<PropShape> = props => {
+export const App: React.FC = props => {
   const dispatch = useDispatch();
-
-  const email = 'test@test.com';
-  const password = 'password';
+  const { auth } = useSelector((state: GlobalStore) => ({ auth: state.auth }));
 
   React.useEffect(() => {
-    dispatch(signin({ email, password }));
+    dispatch(loadAuthentication());
   }, [dispatch]);
 
-  return (
+  return auth.jwt ? (
     <>
-      <h1>Hello, World!</h1>
+      <h1>Authenticated Application</h1>
     </>
+  ) : (
+    <AuthForm />
   );
 };

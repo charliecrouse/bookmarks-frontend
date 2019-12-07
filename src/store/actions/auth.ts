@@ -23,3 +23,15 @@ export const signin = (data: authService.SigninRequest): Thunk<StateShape> => as
     dispatch(actions.signinFailure(err));
   }
 };
+
+export const loadAuthentication = (): Thunk<StateShape> => async dispatch => {
+  dispatch(actions.loadAuthenticationStart());
+  const jwt = window.localStorage.getItem('jwt');
+
+  if (!jwt) {
+    const error = new Error('Failed to load credentials from localstorage!');
+    dispatch(actions.loadAuthenticationFailure(error));
+  } else {
+    dispatch(actions.loadAuthenticationSuccess({ jwt }));
+  }
+};

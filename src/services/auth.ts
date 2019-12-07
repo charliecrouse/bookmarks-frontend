@@ -26,13 +26,14 @@ export const signup = async (props: SignupRequest): Promise<SignupResponse> => {
     const jwt: string | undefined = _.get(res, 'data.token.jwt');
 
     if (!jwt) {
-      throw new Error(`Failed to signin -- response is missing JWT!`);
+      throw new Error(`Failed to signin. The response is missing JWT!`);
     }
 
     window.localStorage.setItem('jwt', jwt);
     return { jwt };
   } catch (err) {
-    return Promise.reject(err.response.data.error || err.message || err);
+    const message = _.get(err, 'response.data.error') || _.get(err, 'message') || err;
+    return Promise.reject(message);
   }
 };
 
@@ -47,12 +48,13 @@ export const signin = async (props: SigninRequest): Promise<SigninResponse> => {
     const jwt: string | undefined = _.get(res, 'data.token.jwt');
 
     if (!jwt) {
-      throw new Error(`Failed to signin -- response is missing JWT!`);
+      throw new Error(`Failed to signin. The response is missing JWT!`);
     }
 
     window.localStorage.setItem('jwt', jwt);
     return { jwt };
   } catch (err) {
-    return Promise.reject(err.response.data.error || err.message || err);
+    const message = _.get(err, 'response.data.error') || _.get(err, 'message') || err;
+    return Promise.reject(message);
   }
 };

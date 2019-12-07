@@ -1,5 +1,5 @@
 import React from 'react';
 
-import { ReduxProvider } from './redux';
+import { ReduxProvider } from './store';
 
 export const Provider: React.FC = ({ children }) => <ReduxProvider>{children}</ReduxProvider>;

@@ -9,7 +9,7 @@ export const handleActionStart = <T extends AsyncState>() =>
     draft.error = undefined;
   });
 
-export const handleActionError = <T extends AsyncState>() =>
+export const handleActionFailure = <T extends AsyncState>() =>
   produce((draft: T, action: PayloadAction<Error>) => {
     draft.loading = false;
     draft.error = action.payload;
