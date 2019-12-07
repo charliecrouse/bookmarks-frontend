@@ -1,7 +1,22 @@
+// External
 import React from 'react';
+import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 
+// Components
+import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
+import { Text } from 'office-ui-fabric-react/lib/Text';
+import { TextField } from 'office-ui-fabric-react/lib/TextField';
+
+// Internal
 import { signin, signup } from '../store/actions/auth';
+
+const AuthSwitch = styled.span`
+  :hover {
+    border-bottom: 1px solid black;
+    cursor: pointer;
+  }
+`;
 
 export const AuthForm: React.FC = props => {
   const [isSignup, setIsSignup] = React.useState<boolean>(false);
@@ -28,33 +43,44 @@ export const AuthForm: React.FC = props => {
     }
   };
 
-  const handleInputChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
+  const handleInputChange = (setter: any) => (
+    e: React.SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>,
+    value?: string,
+  ) => {
     e.preventDefault();
-
-    switch (e.currentTarget.name) {
-      case 'email':
-        return setEmail(e.currentTarget.value);
-      case 'password':
-        return setPassword(e.currentTarget.value);
-      default:
-        return;
-    }
+    setter(value);
   };
 
   return (
     <>
-      <h1>{getAuthMethod(isSignup)}</h1>
+      <Text variant="xxLarge">{getAuthMethod(isSignup)}</Text>
 
       <form onSubmit={authenticate} noValidate>
-        Email:
-        <input type="email" name="email" value={email} onChange={handleInputChange} />
-        Password:
-        <input type="password" name="password" value={password} onChange={handleInputChange} />
-        <button type="submit">{getAuthMethod(isSignup)}</button>
+        <TextField
+          type="email"
+          label="Enter your email:"
+          placeholder="email"
+          value={email}
+          onChange={handleInputChange(setEmail)}
+        />
+
+        <TextField
+          type="password"
+          label="Enter your password:"
+          placeholder="password"
+          value={password}
+          onChange={handleInputChange(setPassword)}
+        />
+
+        <div style={{ marginTop: '10px', display: 'inline-block' }}>
+          <DefaultButton type="submit" text={getAuthMethod(isSignup)} />
+
+          <Text variant="large" style={{ marginLeft: '25px' }}>
+            Switch to{' '}
+            <AuthSwitch onClick={switchAuthMethod}>{getAuthMethod(!isSignup)}</AuthSwitch>
+          </Text>
+        </div>
       </form>
-      <p>
-        Switch to <span onClick={switchAuthMethod}>{getAuthMethod(!isSignup)}</span>
-      </p>
     </>
   );
 };
