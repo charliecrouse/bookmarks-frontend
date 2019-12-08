@@ -1,17 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import * as bookmarksService from '../../services/bookmarks';
+import * as bookmarksService from '../..//services/bookmarks';
+import { Bookmark } from '../../common/bookmarks';
 import { AsyncState, defaultAsyncState } from '../common/state';
 import { handleActionStart, handleActionFailure, handleActionSuccess } from '../common/reducers';
 
 export interface StateShape extends AsyncState {
-  bookmarks: bookmarksService.Bookmark[];
+  bookmarks: Bookmark[];
+  parentId: number | null;
 }
 
 export const initialState: StateShape = {
   ...defaultAsyncState,
   bookmarks: [],
+  parentId: null,
 };
+
+export interface GetParentIdSuccess {
+  parentId: number | null;
+}
+
+export interface SetParentIdSuccess {
+  parentId: number | null;
+}
 
 export const { reducer, actions } = createSlice({
   name: 'bookmarks',
@@ -35,5 +46,14 @@ export const { reducer, actions } = createSlice({
       StateShape,
       bookmarksService.UpdateBookmarkResponse
     >(),
+    getParentIdStart: handleActionStart<StateShape>(),
+    getParentIdFailure: handleActionFailure<StateShape>(),
+    getParentIdSuccess: handleActionSuccess<StateShape, GetParentIdSuccess>(),
+    setParentIdStart: handleActionStart<StateShape>(),
+    setParentIdFailure: handleActionFailure<StateShape>(),
+    setParentIdSuccess: handleActionSuccess<StateShape, SetParentIdSuccess>(),
+    clearParentIdStart: handleActionStart<StateShape>(),
+    clearParentIdFailure: handleActionFailure<StateShape>(),
+    clearParentIdSuccess: handleActionSuccess<StateShape, SetParentIdSuccess>(),
   },
 });

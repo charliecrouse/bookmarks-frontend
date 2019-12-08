@@ -1,7 +1,10 @@
 import * as authService from '../../services/auth';
 import { Thunk } from '../common/actions';
-import { StateShape, actions } from '../reducers/auth';
+import { StateShape, actions, initialState } from '../reducers/auth';
 
+// -----------
+// API ACTIONS
+// -----------
 export const signup = (data: authService.SignupRequest): Thunk<StateShape> => async dispatch => {
   dispatch(actions.signupStart());
 
@@ -24,14 +27,32 @@ export const signin = (data: authService.SigninRequest): Thunk<StateShape> => as
   }
 };
 
+// --------------
+// CLIENT ACTIONS
+// --------------
 export const loadAuthentication = (): Thunk<StateShape> => async dispatch => {
   dispatch(actions.loadAuthenticationStart());
   const jwt = window.localStorage.getItem('jwt');
 
-  if (!jwt) {
-    const error = new Error('Failed to load credentials from localstorage!');
-    dispatch(actions.loadAuthenticationFailure(error));
-  } else {
+  if (jwt) {
     dispatch(actions.loadAuthenticationSuccess({ jwt }));
+  } else {
+    dispatch(actions.loadAuthenticationSuccess({ jwt: '' }));
+  }
+};
+
+export const signout = (): Thunk<StateShape> => async dispatch => {
+  dispatch(actions.signoutStart());
+  try {
+    dispatch(actions.signoutSuccess(initialState));
+
+    // Clear store
+    window.location.href = '/';
+
+    // Clear persisted state
+    window.localStorage.removeItem('jwt');
+    window.localStorage.removeItem('parentId');
+  } catch (err) {
+    dispatch(actions.signoutFailure(err));
   }
 };

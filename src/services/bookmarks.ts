@@ -1,13 +1,7 @@
 import * as _ from 'lodash';
 import axios from 'axios';
 
-export interface Bookmark {
-  id: number;
-  name: string;
-  url?: string;
-  ownerEmail: string;
-  parent: number;
-}
+import { Bookmark } from '../common/bookmarks';
 
 export interface FetchBookmarksRequest {
   jwt: string;

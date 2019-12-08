@@ -6,6 +6,7 @@ import { loadAuthentication } from './store/actions/auth';
 
 import { AuthForm } from './components/AuthForm';
 import { BookmarksDisplay } from './components/BookmarksDisplay';
+import { Layout } from './components/Layout';
 
 export const App: React.FC = props => {
   const dispatch = useDispatch();
@@ -15,5 +16,7 @@ export const App: React.FC = props => {
     dispatch(loadAuthentication());
   }, [dispatch]);
 
-  return auth.jwt ? <BookmarksDisplay /> : <AuthForm />;
+  const bodyComponent = auth.jwt ? <BookmarksDisplay /> : <AuthForm />;
+
+  return <Layout>{bodyComponent}</Layout>;
 };
