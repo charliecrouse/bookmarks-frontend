@@ -8,6 +8,11 @@ export interface Bookmark {
   parent?: number;
 }
 
+export const BookmarkViews: { [key: string]: string } = {
+  LIST: 'LIST',
+  GRID: 'GRID',
+};
+
 export const getChildren = (bookmarks: Bookmark[], id: number | null): Bookmark[] => {
   return _.filter(bookmarks, bookmark => bookmark.parent === id);
 };

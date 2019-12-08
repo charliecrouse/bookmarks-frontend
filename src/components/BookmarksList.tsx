@@ -62,6 +62,7 @@ export const BookmarksList: React.FC = props => {
   const rows = children.map(bookmark => {
     return (
       <BookmarkRow
+        key={bookmark.id}
         bookmark={bookmark}
         onFolderClick={onFolderClick}
         onBookmarkClick={onBookmarkClick}
