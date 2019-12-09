@@ -2,7 +2,10 @@ import * as _ from 'lodash';
 import axios from 'axios';
 
 const http = axios.create({
-  baseURL: process.env.REACT_APP_BOOKMARKS_API,
+  baseURL:
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:3000'
+      : 'http://bookmarks.charliecrouse.me:3000',
 });
 
 console.log(process.env.REACT_APP_BOOKMARKS_API);

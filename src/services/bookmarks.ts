@@ -4,7 +4,10 @@ import axios from 'axios';
 import { Bookmark } from '../common/bookmarks';
 
 const http = axios.create({
-  baseURL: process.env.REACT_APP_BOOKMARKS_API,
+  baseURL:
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:3000'
+      : 'http://bookmarks.charliecrouse.me:3000',
 });
 
 export interface FetchBookmarksRequest {
