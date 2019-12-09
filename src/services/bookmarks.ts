@@ -3,6 +3,10 @@ import axios from 'axios';
 
 import { Bookmark } from '../common/bookmarks';
 
+const http = axios.create({
+  baseURL: process.env.REACT_APP_BOOKMARKS_API,
+});
+
 export interface FetchBookmarksRequest {
   jwt: string;
 }
@@ -15,7 +19,7 @@ export const fetchBookmarks = async (
   props: FetchBookmarksRequest,
 ): Promise<FetchBookmarksResponse> => {
   try {
-    const res = await axios.get(`/bookmarks?jwt=${props.jwt}`);
+    const res = await http.get(`/bookmarks?jwt=${props.jwt}`);
     return res.data;
   } catch (err) {
     const message = _.get(err, 'response.data.error') || _.get(err, 'message') || err;
@@ -36,7 +40,7 @@ export const createBookmark = async (
   props: CreateBookmarkRequest,
 ): Promise<CreateBookmarkResponse> => {
   try {
-    const res = await axios.post(`/bookmarks?jwt=${props.jwt}`, props.bookmark);
+    const res = await http.post(`/bookmarks?jwt=${props.jwt}`, props.bookmark);
     return res.data;
   } catch (err) {
     const message = _.get(err, 'response.data.error') || _.get(err, 'message') || err;
@@ -55,7 +59,7 @@ export const updateBookmark = async (
   props: UpdateBookmarkRequest,
 ): Promise<UpdateBookmarkResponse> => {
   try {
-    const res = await axios.patch(`/bookmarks/${props.bookmark.id}`, props.bookmark);
+    const res = await http.patch(`/bookmarks/${props.bookmark.id}`, props.bookmark);
     return res.data;
   } catch (err) {
     const message = _.get(err, 'response.data.error') || _.get(err, 'message') || err;
@@ -74,7 +78,7 @@ export const deleteBookmark = async (
   props: DeleteBookmarkRequest,
 ): Promise<DeleteBookmarkResponse> => {
   try {
-    const res = await axios.delete(`/bookmarks/${props.bookmark.id}`);
+    const res = await http.delete(`/bookmarks/${props.bookmark.id}`);
     return res.data;
   } catch (err) {
     const message = _.get(err, 'response.data.error') || _.get(err, 'message') || err;
