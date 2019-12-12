@@ -8,8 +8,6 @@ import { Bookmark, isFolder } from '../common/bookmarks';
 import { useBookmarks } from '../hooks/useBookmarks';
 import { setParentId } from '../store/actions/bookmarks';
 
-const BookmarkContent = styled(Table.Cell)``;
-
 export interface BookmarkShape {
   bookmark: Bookmark;
   onFolderClick: (id: number | null) => void;
@@ -37,12 +35,18 @@ const BookmarkRow: React.FC<BookmarkShape> = props => {
 
   return (
     <Table.Row>
-      <BookmarkContent onClick={onClick}>
+      <Table.Cell onClick={onClick}>
         <Header as="h3" image>
           {getBookmarkIcon()}
           <Header.Content>{bookmark.name}</Header.Content>
         </Header>
-      </BookmarkContent>
+      </Table.Cell>
+      <Table.Cell>
+        <Icon name="edit" />
+      </Table.Cell>
+      <Table.Cell>
+        <Icon name="delete" />
+      </Table.Cell>
     </Table.Row>
   );
 };

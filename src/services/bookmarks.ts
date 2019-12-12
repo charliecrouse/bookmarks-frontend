@@ -1,13 +1,11 @@
 import * as _ from 'lodash';
 import axios from 'axios';
 
+import config from '../config';
 import { Bookmark } from '../common/bookmarks';
 
 const http = axios.create({
-  baseURL:
-    process.env.NODE_ENV === 'development'
-      ? 'http://localhost:3000'
-      : 'http://bookmarks.charliecrouse.me:3000',
+  baseURL: config.bookmarks.url,
 });
 
 export interface FetchBookmarksRequest {

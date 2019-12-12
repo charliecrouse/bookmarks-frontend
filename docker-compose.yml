@@ -1,0 +1,7 @@
+version: "3"
+services:
+  frontend:
+    build: .
+    ports:
+      - "${PORT}:80"
+    container_name: bookmarks-frontend

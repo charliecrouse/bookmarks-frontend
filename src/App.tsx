@@ -16,7 +16,6 @@ export const App: React.FC = props => {
     dispatch(loadAuthentication());
   }, [dispatch]);
 
-  const bodyComponent = auth.jwt ? <BookmarksDisplay /> : <AuthForm />;
-
-  return <Layout>{bodyComponent}</Layout>;
+  const main = auth.jwt ? <BookmarksDisplay /> : <AuthForm />;
+  return <Layout>{main}</Layout>;
 };

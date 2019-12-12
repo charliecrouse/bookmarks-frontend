@@ -87,11 +87,11 @@ ARG APP_NAME
 ENV APP_DIR=/var/www/${APP_NAME}
 
 # -----------------------------------
-# Stage 2, Layer 2: Application build
+# Stage 2, Layer 0: Application build
 # -----------------------------------
 COPY --from=build ${APP_DIR}/build /usr/share/nginx/html
 
 # -------------------------------
-# Stage 2, Layer 3: Expose assets
+# Stage 2, Layer 1: Expose assets
 # -------------------------------
 EXPOSE 80
