@@ -30,7 +30,11 @@ export const fetchBookmarks = async (
 
 export interface CreateBookmarkRequest {
   jwt: string;
-  bookmark: Bookmark;
+  bookmark: {
+    name: string;
+    url: string | undefined;
+    parent: number | null;
+  };
 }
 
 export interface CreateBookmarkResponse {
@@ -60,7 +64,10 @@ export const updateBookmark = async (
   props: UpdateBookmarkRequest,
 ): Promise<UpdateBookmarkResponse> => {
   try {
-    const res = await http.patch(`/bookmarks/${props.bookmark.id}`, props.bookmark);
+    const res = await http.patch(
+      `/bookmarks/${props.bookmark.id}?jwt=${props.jwt}`,
+      props.bookmark,
+    );
     return res.data;
   } catch (err) {
     const message = _.get(err, 'response.data.error') || _.get(err, 'message') || err;
@@ -79,7 +86,7 @@ export const deleteBookmark = async (
   props: DeleteBookmarkRequest,
 ): Promise<DeleteBookmarkResponse> => {
   try {
-    const res = await http.delete(`/bookmarks/${props.bookmark.id}`);
+    const res = await http.delete(`/bookmarks/${props.bookmark.id}?jwt=${props.jwt}`);
     return res.data;
   } catch (err) {
     const message = _.get(err, 'response.data.error') || _.get(err, 'message') || err;

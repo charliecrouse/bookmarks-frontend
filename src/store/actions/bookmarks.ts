@@ -28,6 +28,7 @@ export const createBookmark = (
   try {
     const res = await bookmarksService.createBookmark(data);
     dispatch(actions.createBookmarkSuccess(res));
+    dispatch(fetchBookmarks({ jwt: data.jwt }));
   } catch (err) {
     dispatch(actions.createBookmarkFailure(err));
   }
@@ -40,8 +41,22 @@ export const updateBookmark = (
   try {
     const res = await bookmarksService.updateBookmark(data);
     dispatch(actions.updateBookmarkSuccess(res));
+    dispatch(fetchBookmarks({ jwt: data.jwt }));
   } catch (err) {
     dispatch(actions.updateBookmarkFailure(err));
+  }
+};
+
+export const deleteBookmark = (
+  data: bookmarksService.DeleteBookmarkRequest,
+): Thunk<StateShape> => async dispatch => {
+  dispatch(actions.deleteBookmarkStart());
+  try {
+    const res = await bookmarksService.deleteBookmark(data);
+    dispatch(actions.deleteBookmarkSuccess(res));
+    dispatch(fetchBookmarks({ jwt: data.jwt }));
+  } catch (err) {
+    dispatch(actions.deleteBookmarkFailure(err));
   }
 };
 
