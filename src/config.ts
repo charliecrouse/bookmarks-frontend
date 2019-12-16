@@ -22,7 +22,7 @@ const development: Config = {
 
 const production: Config = {
   bookmarks: {
-    url: `http://${process.env.REACT_APP_BOOKMARKS_BACKEND_HOST || 'localhost'}:${parseInt(
+    url: `http://${process.env.REACT_APP_BOOKMARKS_BACKEND_HOST || 'bookmarks.charliecrouse.me'}:${parseInt(
       process.env.REACT_APP_BOOKMARKS_BACKEND_PORT || '3000',
     )}`,
   },
