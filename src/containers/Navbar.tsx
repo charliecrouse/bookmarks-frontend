@@ -11,12 +11,12 @@ export default () => {
 
   const onSignout = () => {
     dispatch(signout());
-  }
+  };
 
   const props = {
     isAuthenticated: !!auth.jwt,
     onSignout,
-  }
+  };
 
   return <Navbar {...props} />;
-}
+};

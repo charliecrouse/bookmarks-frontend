@@ -12,7 +12,12 @@ module.exports = {
   },
   settings: {
     react: {
-      version: 'detect'
-    }
-  }
+      version: 'detect',
+    },
+  },
+  rules: {
+    'react/prop-types': 0,
+    '@typescript-eslint/no-use-before-define': 0,
+    '@typescript-eslint/explicit-function-return-type': 0,
+  },
 };

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Button, Menu } from 'semantic-ui-react';
 
-
 interface NavbarProps {
   isAuthenticated: boolean;
   onSignout: () => void;

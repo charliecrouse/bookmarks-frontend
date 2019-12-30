@@ -9,6 +9,6 @@ const AnonymousApp: React.FC = () => {
       <AuthForm />
     </Layout>
   );
-}
+};
 
 export default AnonymousApp;

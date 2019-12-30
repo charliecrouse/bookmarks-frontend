@@ -14,5 +14,5 @@ export const App: React.FC = () => {
     dispatch(loadAuthentication());
   }, [dispatch]);
 
-  return <>{auth.jwt ? <AuthenticatedApp /> : <AnonymousApp />}</>
+  return <>{auth.jwt ? <AuthenticatedApp /> : <AnonymousApp />}</>;
 };

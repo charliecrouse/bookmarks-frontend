@@ -16,17 +16,17 @@ export default () => {
     } else {
       dispatch(signin(data as SigninRequest));
     }
-  }
+  };
 
   const onSwitch = () => {
     setIsSignup(!isSignup);
-  }
+  };
 
   const props = {
     isSignup,
     onSubmit,
     onSwitch,
-  }
+  };
 
   return <AuthForm {...props} />;
-}
+};

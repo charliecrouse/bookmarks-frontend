@@ -2,20 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import { Dimmer, Loader, Segment } from 'semantic-ui-react';
 
-
 import Navbar from '../containers/Navbar';
 import { useAppStatus } from '../hooks/useAppStatus';
 
 const StyledContainer = styled.div`
   margin: 0;
   padding: 0;
-`
-
-const StyledMain = styled.div`
-  margin: 10%;
 `;
 
-const Layout: React.FC = (props) => {
+const StyledMain = styled.div`
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 2.5%;
+`;
+
+const Layout: React.FC = props => {
   const { error, loading } = useAppStatus();
 
   return (
@@ -36,7 +37,7 @@ const Layout: React.FC = (props) => {
         </StyledMain>
       </>
     </StyledContainer>
-  )
+  );
 };
 
 export default Layout;
