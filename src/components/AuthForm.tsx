@@ -43,27 +43,13 @@ const AuthForm: React.FC<AuthFormProps> = props => {
         <Controller
           name="email"
           control={control}
-          as={
-            <Form.Field
-              control="input"
-              label="Email"
-              placeholder="Enter your email"
-              type="email"
-            />
-          }
+          as={<Form.Field control="input" label="Email" placeholder="Enter your email" type="email" />}
         />
 
         <Controller
           name="password"
           control={control}
-          as={
-            <Form.Field
-              control="input"
-              label="Password"
-              placeholder="Enter your password"
-              type="password"
-            />
-          }
+          as={<Form.Field control="input" label="Password" placeholder="Enter your password" type="password" />}
         />
 
         <Button basic type="submit">
@@ -73,15 +59,10 @@ const AuthForm: React.FC<AuthFormProps> = props => {
 
       <ErrorMessage name="email" errors={errors} as={<Segment inverted color="red" secondary />} />
 
-      <ErrorMessage
-        name="password"
-        errors={errors}
-        as={<Segment inverted color="red" secondary />}
-      />
+      <ErrorMessage name="password" errors={errors} as={<Segment inverted color="red" secondary />} />
 
       <Header>
-        Switch to{' '}
-        <StyledSwitcher onClick={onSwitch}>{isSignup ? 'signin' : 'signup'}</StyledSwitcher>
+        Switch to <StyledSwitcher onClick={onSwitch}>{isSignup ? 'signin' : 'signup'}</StyledSwitcher>
       </Header>
     </>
   );

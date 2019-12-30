@@ -15,9 +15,7 @@ export interface FetchBookmarksResponse {
   bookmarks: Bookmark[];
 }
 
-export const fetchBookmarks = async (
-  props: FetchBookmarksRequest,
-): Promise<FetchBookmarksResponse> => {
+export const fetchBookmarks = async (props: FetchBookmarksRequest): Promise<FetchBookmarksResponse> => {
   try {
     const res = await http.get(`/bookmarks?jwt=${props.jwt}`);
     return res.data;
@@ -40,9 +38,7 @@ export interface CreateBookmarkResponse {
   bookmark: Bookmark;
 }
 
-export const createBookmark = async (
-  props: CreateBookmarkRequest,
-): Promise<CreateBookmarkResponse> => {
+export const createBookmark = async (props: CreateBookmarkRequest): Promise<CreateBookmarkResponse> => {
   try {
     const res = await http.post(`/bookmarks?jwt=${props.jwt}`, props.bookmark);
     return res.data;
@@ -59,10 +55,7 @@ export interface UpdateBookmarkRequest {
 
 export const updateBookmark = async (props: UpdateBookmarkRequest): Promise<{}> => {
   try {
-    const res = await http.patch(
-      `/bookmarks/${props.bookmark.id}?jwt=${props.jwt}`,
-      props.bookmark,
-    );
+    const res = await http.patch(`/bookmarks/${props.bookmark.id}?jwt=${props.jwt}`, props.bookmark);
     return res.data;
   } catch (err) {
     const message = _.get(err, 'response.data.error') || _.get(err, 'message') || err;

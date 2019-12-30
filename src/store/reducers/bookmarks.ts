@@ -41,16 +41,10 @@ export const { reducer, actions } = createSlice({
     // API Actions
     fetchBookmarksStart: handleActionStart<StateShape>(),
     fetchBookmarksFailure: handleActionFailure<StateShape>(),
-    fetchBookmarksSuccess: handleActionSuccess<
-      StateShape,
-      bookmarksService.FetchBookmarksResponse
-    >(),
+    fetchBookmarksSuccess: handleActionSuccess<StateShape, bookmarksService.FetchBookmarksResponse>(),
     createBookmarkStart: handleActionStart<StateShape>(),
     createBookmarkFailure: handleActionFailure<StateShape>(),
-    createBookmarkSuccess: handleActionSuccess<
-      StateShape,
-      bookmarksService.CreateBookmarkResponse
-    >(),
+    createBookmarkSuccess: handleActionSuccess<StateShape, bookmarksService.CreateBookmarkResponse>(),
     updateBookmarkStart: handleActionStart<StateShape>(),
     updateBookmarkFailure: handleActionFailure<StateShape>(),
     updateBookmarkSuccess: handleActionSuccess<StateShape, {}>(),

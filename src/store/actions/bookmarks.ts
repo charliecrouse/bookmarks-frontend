@@ -7,9 +7,7 @@ import { StateShape, actions } from '../reducers/bookmarks';
 // -----------
 // API ACTIONS
 // -----------
-export const fetchBookmarks = (
-  data: bookmarksService.FetchBookmarksRequest,
-): Thunk<StateShape> => async dispatch => {
+export const fetchBookmarks = (data: bookmarksService.FetchBookmarksRequest): Thunk<StateShape> => async dispatch => {
   dispatch(actions.fetchBookmarksStart());
   try {
     const res = await bookmarksService.fetchBookmarks(data);
@@ -20,9 +18,7 @@ export const fetchBookmarks = (
   }
 };
 
-export const createBookmark = (
-  data: bookmarksService.CreateBookmarkRequest,
-): Thunk<StateShape> => async dispatch => {
+export const createBookmark = (data: bookmarksService.CreateBookmarkRequest): Thunk<StateShape> => async dispatch => {
   dispatch(actions.createBookmarkStart());
   try {
     const res = await bookmarksService.createBookmark(data);
@@ -33,9 +29,7 @@ export const createBookmark = (
   }
 };
 
-export const updateBookmark = (
-  data: bookmarksService.UpdateBookmarkRequest,
-): Thunk<StateShape> => async dispatch => {
+export const updateBookmark = (data: bookmarksService.UpdateBookmarkRequest): Thunk<StateShape> => async dispatch => {
   dispatch(actions.updateBookmarkStart());
   try {
     const res = await bookmarksService.updateBookmark(data);
@@ -46,9 +40,7 @@ export const updateBookmark = (
   }
 };
 
-export const deleteBookmark = (
-  data: bookmarksService.DeleteBookmarkRequest,
-): Thunk<StateShape> => async dispatch => {
+export const deleteBookmark = (data: bookmarksService.DeleteBookmarkRequest): Thunk<StateShape> => async dispatch => {
   dispatch(actions.deleteBookmarkStart());
   try {
     const res = await bookmarksService.deleteBookmark(data);
