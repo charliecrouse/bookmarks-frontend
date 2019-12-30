@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Dimmer, Loader, Segment } from 'semantic-ui-react';
+
 
 import Navbar from '../containers/Navbar';
+import { useAppStatus } from '../hooks/useAppStatus';
 
-// -----------------
-// STYLED COMPONENTS
-// -----------------
 const StyledContainer = styled.div`
   margin: 0;
   padding: 0;
@@ -15,18 +15,28 @@ const StyledMain = styled.div`
   margin: 10%;
 `;
 
-// --------------
-// MAIN COMPONENT
-// --------------
-const Layout: React.FC = (props) => (
-  <StyledContainer>
-    <Navbar />
+const Layout: React.FC = (props) => {
+  const { error, loading } = useAppStatus();
 
-    <StyledMain>
-      {' :-) '}
-      {props.children}
-    </StyledMain>
-  </StyledContainer>
-);
+  return (
+    <StyledContainer>
+      <Navbar />
+      <>
+        <Dimmer active={loading}>
+          <Loader size="massive" />
+        </Dimmer>
+
+        <StyledMain>
+          {error && (
+            <Segment inverted color="red" secondary>
+              {error.message || error}
+            </Segment>
+          )}
+          {props.children}
+        </StyledMain>
+      </>
+    </StyledContainer>
+  )
+};
 
 export default Layout;
