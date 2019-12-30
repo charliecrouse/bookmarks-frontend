@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Button, Menu } from 'semantic-ui-react';
 
 interface NavbarProps {
@@ -6,7 +6,7 @@ interface NavbarProps {
   onSignout: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = (props) => (
+const Navbar: React.FC<NavbarProps> = props => (
   <Menu attached borderless size="massive">
     <Menu.Item header>Bookmarks</Menu.Item>
 
@@ -15,7 +15,7 @@ const Navbar: React.FC<NavbarProps> = (props) => (
         <Menu.Item>
           <Button basic onClick={props.onSignout} primary>
             Signout
-              </Button>
+          </Button>
         </Menu.Item>
       </Menu.Menu>
     )}
