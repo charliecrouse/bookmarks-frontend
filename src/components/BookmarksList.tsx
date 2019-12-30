@@ -67,7 +67,6 @@ export const BookmarksList: React.FC = props => {
   const dispatch = useDispatch();
   const { children } = useBookmarks();
   const { auth } = useSelector((store: GlobalStore) => store);
-  console.log(auth);
 
   const onFolderClick = (parentId: number | null) => {
     dispatch(setParentId(parentId));

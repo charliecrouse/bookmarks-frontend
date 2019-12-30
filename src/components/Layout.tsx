@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { Dimmer, Loader, Segment } from 'semantic-ui-react';
 
-import { Navbar } from './Navbar';
+import { NavbarContainer as Navbar } from '../containers/Navbar';
 import { useAppStatus } from '../hooks/useAppStatus';
 
 const Reset = styled.div`

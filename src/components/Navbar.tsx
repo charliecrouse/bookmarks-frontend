@@ -1,27 +1,22 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Button, Menu } from 'semantic-ui-react';
 
-import { GlobalStore } from '../store';
-import { signout } from '../store/actions/auth';
+export interface NavbarProps {
+  isAuthenticated: boolean;
+  onSignout: () => void;
+}
 
-export const Navbar: React.FC = props => {
-  const dispatch = useDispatch();
-  const { auth } = useSelector((store: GlobalStore) => ({ auth: store.auth }));
-
-  const handleSignout = () => {
-    dispatch(signout());
-  };
-
+export const Navbar: React.FC<NavbarProps> = props => {
+  const { isAuthenticated, onSignout } = props;
   return (
     <>
       <Menu attached borderless size="massive">
         <Menu.Item header>Bookmarks</Menu.Item>
 
-        {auth.jwt && (
+        {isAuthenticated && (
           <Menu.Menu position="right">
             <Menu.Item>
-              <Button basic onClick={handleSignout} primary>
+              <Button basic onClick={onSignout} primary>
                 Signout
               </Button>
             </Menu.Item>

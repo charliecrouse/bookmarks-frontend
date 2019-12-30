@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GlobalStore } from './store';
 import { loadAuthentication } from './store/actions/auth';
 
-import { AuthForm } from './components/AuthForm';
+import { AuthFormContainer as AuthForm } from './containers/Auth/AuthForm';
 import { BookmarksDisplay } from './components/BookmarksDisplay';
 import { Layout } from './components/Layout';
 
