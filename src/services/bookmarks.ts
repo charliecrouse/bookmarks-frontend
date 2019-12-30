@@ -1,11 +1,10 @@
 import * as _ from 'lodash';
 import axios from 'axios';
 
-import config from '../config';
 import { Bookmark } from '../common/bookmarks';
 
 const http = axios.create({
-  baseURL: config.bookmarks.url,
+  baseURL: process.env.REACT_APP_BOOKMARKS_API || 'http://localhost:3000',
 });
 
 export interface FetchBookmarksRequest {
