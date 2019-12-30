@@ -6,7 +6,7 @@ import { FormData } from '../common/forms';
 import { SignupRequest, SigninRequest } from '../services/auth';
 import { signup, signin } from '../store/actions/auth';
 
-export default () => {
+export default function AuthFormContainer() {
   const [isSignup, setIsSignup] = React.useState<boolean>(false);
   const dispatch = useDispatch();
 
@@ -29,4 +29,4 @@ export default () => {
   };
 
   return <AuthForm {...props} />;
-};
+}

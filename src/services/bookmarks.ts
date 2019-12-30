@@ -57,11 +57,7 @@ export interface UpdateBookmarkRequest {
   bookmark: Bookmark;
 }
 
-export interface UpdateBookmarkResponse {}
-
-export const updateBookmark = async (
-  props: UpdateBookmarkRequest,
-): Promise<UpdateBookmarkResponse> => {
+export const updateBookmark = async (props: UpdateBookmarkRequest): Promise<{}> => {
   try {
     const res = await http.patch(
       `/bookmarks/${props.bookmark.id}?jwt=${props.jwt}`,
@@ -79,11 +75,7 @@ export interface DeleteBookmarkRequest {
   bookmark: Bookmark;
 }
 
-export interface DeleteBookmarkResponse {}
-
-export const deleteBookmark = async (
-  props: DeleteBookmarkRequest,
-): Promise<DeleteBookmarkResponse> => {
+export const deleteBookmark = async (props: DeleteBookmarkRequest): Promise<{}> => {
   try {
     const res = await http.delete(`/bookmarks/${props.bookmark.id}?jwt=${props.jwt}`);
     return res.data;

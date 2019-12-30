@@ -53,16 +53,10 @@ export const { reducer, actions } = createSlice({
     >(),
     updateBookmarkStart: handleActionStart<StateShape>(),
     updateBookmarkFailure: handleActionFailure<StateShape>(),
-    updateBookmarkSuccess: handleActionSuccess<
-      StateShape,
-      bookmarksService.UpdateBookmarkResponse
-    >(),
+    updateBookmarkSuccess: handleActionSuccess<StateShape, {}>(),
     deleteBookmarkStart: handleActionStart<StateShape>(),
     deleteBookmarkFailure: handleActionFailure<StateShape>(),
-    deleteBookmarkSuccess: handleActionSuccess<
-      StateShape,
-      bookmarksService.DeleteBookmarkResponse
-    >(),
+    deleteBookmarkSuccess: handleActionSuccess<StateShape, {}>(),
     // Client Actions
     getParentIdStart: handleActionStart<StateShape>(),
     getParentIdSuccess: handleActionSuccess<StateShape, GetParentIdSuccess>(),

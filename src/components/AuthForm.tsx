@@ -12,7 +12,7 @@ const StyledSwitcher = styled.span`
     border-bottom: 1px solid blue;
     cursor: pointer;
   }
-`
+`;
 
 interface AuthFormProps {
   isSignup: boolean;
@@ -20,13 +20,19 @@ interface AuthFormProps {
   onSubmit: (data: FormData) => void;
 }
 
-const AuthForm: React.FC<AuthFormProps> = (props) => {
+const AuthForm: React.FC<AuthFormProps> = props => {
   const { isSignup, onSwitch, onSubmit } = props;
   const { control, errors, handleSubmit } = useForm({
     validationSchema: yup.object().shape({
-      email: yup.string().email().required(),
-      password: yup.string().required().min(5),
-    })
+      email: yup
+        .string()
+        .email()
+        .required(),
+      password: yup
+        .string()
+        .required()
+        .min(5),
+    }),
   });
 
   return (
@@ -38,7 +44,12 @@ const AuthForm: React.FC<AuthFormProps> = (props) => {
           name="email"
           control={control}
           as={
-            <Form.Field control="input" label="Email" placeholder="Enter your email" type="email" />
+            <Form.Field
+              control="input"
+              label="Email"
+              placeholder="Enter your email"
+              type="email"
+            />
           }
         />
 
@@ -46,7 +57,12 @@ const AuthForm: React.FC<AuthFormProps> = (props) => {
           name="password"
           control={control}
           as={
-            <Form.Field control="input" label="Password" placeholder="Enter your password" type="password" />
+            <Form.Field
+              control="input"
+              label="Password"
+              placeholder="Enter your password"
+              type="password"
+            />
           }
         />
 
@@ -55,30 +71,20 @@ const AuthForm: React.FC<AuthFormProps> = (props) => {
         </Button>
       </Form>
 
-      <ErrorMessage
-        name="email"
-        errors={errors}
-        as={
-          <Segment inverted color="red" secondary />
-        }
-      />
+      <ErrorMessage name="email" errors={errors} as={<Segment inverted color="red" secondary />} />
 
       <ErrorMessage
         name="password"
         errors={errors}
-        as={
-          <Segment inverted color="red" secondary />
-        }
+        as={<Segment inverted color="red" secondary />}
       />
 
       <Header>
         Switch to{' '}
-        <StyledSwitcher onClick={onSwitch}>
-          {isSignup ? 'signin' : 'signup'}
-        </StyledSwitcher>
+        <StyledSwitcher onClick={onSwitch}>{isSignup ? 'signin' : 'signup'}</StyledSwitcher>
       </Header>
     </>
   );
-}
+};
 
 export default AuthForm;

@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar';
 import { GlobalStore } from '../store';
 import { signout } from '../store/actions/auth';
 
-export default () => {
+export default function NavbarContainer() {
   const dispatch = useDispatch();
   const { auth } = useSelector((store: GlobalStore) => ({ auth: store.auth }));
 
@@ -19,4 +19,4 @@ export default () => {
   };
 
   return <Navbar {...props} />;
-};
+}
