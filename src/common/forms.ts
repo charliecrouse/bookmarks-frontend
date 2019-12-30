@@ -1,1 +1,1 @@
-import {} from 'react-hook-form';
+export type FormData = Record<string, any>;

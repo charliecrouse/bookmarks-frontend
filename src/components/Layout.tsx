@@ -1,42 +1,32 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Dimmer, Loader, Segment } from 'semantic-ui-react';
+import Navbar from '../containers/Navbar';
 
-import { NavbarContainer as Navbar } from '../containers/Navbar';
-import { useAppStatus } from '../hooks/useAppStatus';
-
-const Reset = styled.div`
+// -----------------
+// STYLED COMPONENTS
+// -----------------
+const StyledContainer = styled.div`
   margin: 0;
   padding: 0;
+`
+
+const StyledMain = styled.div`
+  margin: 10%;
 `;
 
-const Main = styled.div`
-  margin-top: 2.5%;
-  margin-left: 10%;
-  margin-right: 10%;
-`;
+// --------------
+// MAIN COMPONENT
+// --------------
+const Layout: React.FC = (props) => (
+  <StyledContainer>
+    <Navbar />
 
-export const Layout: React.FC = props => {
-  const { loading, error } = useAppStatus();
+    <StyledMain>
+      {' :-) '}
+      {props.children}
+    </StyledMain>
+  </StyledContainer>
+);
 
-  return (
-    <Reset>
-      <Navbar />
-      <>
-        <Dimmer active={loading}>
-          <Loader size="massive" />
-        </Dimmer>
-
-        <Main>
-          {error && (
-            <Segment inverted color="red" secondary>
-              {error.message || error}
-            </Segment>
-          )}
-          {props.children}
-        </Main>
-      </>
-    </Reset>
-  );
-};
+export default Layout;

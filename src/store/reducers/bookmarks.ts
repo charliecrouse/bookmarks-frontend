@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import * as bookmarksService from '../../services/bookmarks';
-import { Bookmark, BookmarkViews } from '../../common/bookmarks';
+import { Bookmark, DISPLAY_VARIANT } from '../../common/bookmarks';
 import { AsyncState, defaultAsyncState } from '../common/state';
 import { handleActionStart, handleActionFailure, handleActionSuccess } from '../common/reducers';
 
@@ -15,7 +15,7 @@ export const initialState: StateShape = {
   ...defaultAsyncState,
   bookmarks: [],
   parentId: null,
-  view: BookmarkViews.LIST,
+  view: DISPLAY_VARIANT.LIST,
 };
 
 export interface GetParentIdSuccess {

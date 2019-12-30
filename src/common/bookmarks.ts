@@ -8,16 +8,28 @@ export interface Bookmark {
   parent?: number;
 }
 
-export const BookmarkViews: { [key: string]: string } = {
-  LIST: 'LIST',
-  GRID: 'GRID',
-};
+export enum DISPLAY_VARIANT {
+  LIST = 'LIST',
+  GRID = 'GRID',
+}
 
+/**
+ * Return a list of bookmarks whose `parent` field matches the given `id`.
+ *
+ * @param bookmarks list of bookmarks to
+ * @param id the id of the parent bookmark
+ */
 export const getChildren = (bookmarks: Bookmark[], id: number | null): Bookmark[] => {
   return _.filter(bookmarks, bookmark => bookmark.parent === id);
 };
 
-// Note: includes the bookmark with the given id
+/**
+ * Return the parent tree for the bookmark with the given `id`.
+ * Note: the result will include the bookmark with the given id.
+ *
+ * @param bookmarks the list of bookmarks to filter
+ * @param id
+ */
 export const getParents = (bookmarks: Bookmark[], id: number | null): Bookmark[] => {
   const parents: Bookmark[] = [];
 
@@ -40,14 +52,30 @@ export const getParents = (bookmarks: Bookmark[], id: number | null): Bookmark[]
   return parents;
 };
 
+/**
+ * Return the bookmark with the given `id` from the given list of bookmarks.
+ *
+ * @param bookmarks the list of bookmarks to search
+ * @param id the id of the bookmark to return
+ */
 export const findBookmarkById = (bookmarks: Bookmark[], id: number): Bookmark | undefined => {
   return _.find(bookmarks, bookmark => bookmark.id === id);
 };
 
+/**
+ * Return true if the given bookmark is a true bookmark and not a folder.
+ *
+ * @param bookmark the bookmark to identify
+ */
 export const isBookmark = (bookmark: Bookmark): boolean => {
   return !!bookmark.url;
 };
 
+/**
+ * Return true if the given bookmark is a folder and not a true bookmark.
+ *
+ * @param bookmark the bookmark to identify
+ */
 export const isFolder = (bookmark: Bookmark): boolean => {
   return !isBookmark(bookmark);
 };

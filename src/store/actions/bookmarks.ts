@@ -1,7 +1,7 @@
 import * as bookmarksService from '../../services/bookmarks';
 
 import { Thunk } from '../common/actions';
-import { BookmarkViews } from '../../common/bookmarks';
+import { DISPLAY_VARIANT } from '../../common/bookmarks';
 import { StateShape, actions } from '../reducers/bookmarks';
 
 // -----------
@@ -14,7 +14,6 @@ export const fetchBookmarks = (
   try {
     const res = await bookmarksService.fetchBookmarks(data);
     dispatch(actions.fetchBookmarksSuccess(res));
-    dispatch(getParentId());
     dispatch(getView());
   } catch (err) {
     dispatch(actions.fetchBookmarksFailure(err));
@@ -103,11 +102,11 @@ export const getView = (): Thunk<StateShape> => async dispatch => {
 
     // Prevent invalid or unknown view from being set
     if (!view) throw new Error('');
-    if (!BookmarkViews[view]) throw new Error('');
+    if (!(view in DISPLAY_VARIANT)) throw new Error('');
 
     dispatch(actions.setViewSuccess({ view }));
   } catch (err) {
-    dispatch(actions.setViewSuccess({ view: BookmarkViews.LIST }));
+    dispatch(actions.setViewSuccess({ view: DISPLAY_VARIANT.LIST }));
   }
 };
 
@@ -115,11 +114,11 @@ export const setView = (view: string): Thunk<StateShape> => async dispatch => {
   dispatch(actions.setViewStart());
 
   try {
-    if (BookmarkViews[view]) {
+    if (view in DISPLAY_VARIANT) {
       window.localStorage.setItem('bookmarks-view', view);
       dispatch(actions.setViewSuccess({ view }));
     } else {
-      window.localStorage.setItem('bookmarks-view', BookmarkViews.LIST);
+      window.localStorage.setItem('bookmarks-view', DISPLAY_VARIANT.LIST);
       dispatch(actions.setViewSuccess({ view }));
     }
   } catch (err) {
