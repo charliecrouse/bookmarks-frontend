@@ -4,20 +4,18 @@ import { Menu } from 'semantic-ui-react';
 import BookmarksBreadcrumbs from './BookmarksBreadcrumbs';
 import BookmarksList from './BookmarksList';
 import BookmarksGrid from './BookmarksGrid';
-import { Bookmark, DISPLAY_VARIANT, sortBookmarks, getChildren } from '../common/bookmarks';
+import { Bookmark, DISPLAY_VARIANT } from '../common/bookmarks';
 
 interface BookmarksProps {
-  parent: Bookmark | undefined;
   bookmarks: Bookmark[];
+  parent?: Bookmark;
+  children: Bookmark[];
   variant: DISPLAY_VARIANT;
-  onClick: (bookmark: Bookmark | undefined) => void;
+  onClick: (bookmark?: Bookmark) => void;
 }
 
 const Bookmarks: React.FC<BookmarksProps> = props => {
-  const { parent, bookmarks, variant, onClick } = props;
-
-  const children = getChildren(bookmarks, parent?.id || null);
-  const sortedChildren = sortBookmarks(children);
+  const { bookmarks, parent, children, variant, onClick } = props;
 
   const BookmarksDisplay = variant === DISPLAY_VARIANT.LIST ? BookmarksList : BookmarksGrid;
 
@@ -28,7 +26,7 @@ const Bookmarks: React.FC<BookmarksProps> = props => {
           <BookmarksBreadcrumbs parent={parent} bookmarks={bookmarks} onClick={onClick} />
         </Menu.Item>
       </Menu>
-      <BookmarksDisplay bookmarks={sortedChildren} onClick={onClick} />
+      <BookmarksDisplay bookmarks={children} onClick={onClick} />
     </>
   );
 };

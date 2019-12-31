@@ -46,12 +46,12 @@ export const signout = (): Thunk<StateShape> => async dispatch => {
   try {
     dispatch(actions.signoutSuccess(initialState));
 
-    // Clear store
+    // Clear global store
     window.location.href = '/';
 
     // Clear persisted state
     window.localStorage.removeItem('jwt');
-    window.localStorage.removeItem('parentId');
+    window.localStorage.removeItem('parent');
   } catch (err) {
     dispatch(actions.signoutFailure(err));
   }

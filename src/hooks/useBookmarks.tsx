@@ -1,23 +1,24 @@
-import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { getChildren } from '../common/bookmarks';
+import { Bookmark, getChildren, sortBookmarks } from '../common/bookmarks';
 import { GlobalStore } from '../store';
+import { fetchBookmarks, setParent } from '../store/actions/bookmarks';
 
 export const useBookmarks = () => {
-  const history = useHistory();
+  const dispatch = useDispatch();
+  const { auth, bookmarks } = useSelector((store: GlobalStore) => store);
 
-  const { bookmarks } = useSelector((store: GlobalStore) => store);
-  const children = getChildren(bookmarks.bookmarks, bookmarks.parentId);
+  React.useEffect(() => {
+    dispatch(fetchBookmarks({ jwt: auth.jwt }));
+  }, [dispatch, auth.jwt]);
 
-  const setParent = (id: number | null) => {
-    if (id) {
-      history.push({
-        pathname: window.location.href,
-        search: window.location.search || '?' + new URLSearchParams({ parent: id.toString() }),
-      });
-    }
+  const children = sortBookmarks(getChildren(bookmarks.bookmarks, bookmarks.parent?.id ?? null));
+  const { parent } = bookmarks;
+
+  const _setParent = (bookmark?: Bookmark) => {
+    dispatch(setParent(bookmark));
   };
 
-  return { bookmarks, children, setParent };
+  return { bookmarks: bookmarks.bookmarks, children, parent, setParent: _setParent };
 };

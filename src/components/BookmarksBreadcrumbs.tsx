@@ -6,7 +6,7 @@ import BookmarksBreadcrumbsItem from './BookmarksBreadcrumbsItem';
 import { Bookmark, getParents } from '../common/bookmarks';
 
 interface BookmarksBreadcrumbsProps {
-  parent: Bookmark | undefined;
+  parent?: Bookmark;
   bookmarks: Bookmark[];
   onClick: (bookmark?: Bookmark) => void;
 }
