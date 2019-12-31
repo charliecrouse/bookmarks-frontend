@@ -79,3 +79,14 @@ export const isBookmark = (bookmark: Bookmark): boolean => {
 export const isFolder = (bookmark: Bookmark): boolean => {
   return !isBookmark(bookmark);
 };
+
+/**
+ * Sorts bookmarks by name (folders always come before true bookmarks).
+ *
+ * @param bookmarks the list of bookmarks to sort
+ */
+export const sortBookmarks = (bookmarks: Bookmark[]): Bookmark[] => {
+  const folders = _.sortBy(_.filter(bookmarks, isFolder), (bookmark: Bookmark) => bookmark.name);
+  const _bookmarks = _.sortBy(_.filter(bookmarks, isBookmark), (bookmark: Bookmark) => bookmark.name);
+  return _.concat(folders, _bookmarks);
+};

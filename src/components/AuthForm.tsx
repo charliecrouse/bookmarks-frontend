@@ -52,7 +52,7 @@ const AuthForm: React.FC<AuthFormProps> = props => {
           as={<Form.Field control="input" label="Password" placeholder="Enter your password" type="password" />}
         />
 
-        <Button basic type="submit">
+        <Button basic secondary type="submit">
           {isSignup ? 'SIGNUP' : 'SIGNIN'}
         </Button>
       </Form>

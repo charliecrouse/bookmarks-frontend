@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Layout from '../components/Layout';
+import Layout from './Layout';
 import AuthForm from './AuthForm';
 
 const AnonymousApp: React.FC = () => {

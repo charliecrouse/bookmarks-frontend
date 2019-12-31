@@ -6,20 +6,26 @@ interface NavbarProps {
   onSignout: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = props => (
-  <Menu attached borderless size="massive">
-    <Menu.Item header>Bookmarks</Menu.Item>
+const Navbar: React.FC<NavbarProps> = props => {
+  const { isAuthenticated, onSignout } = props;
 
-    {props.isAuthenticated && (
-      <Menu.Menu position="right">
-        <Menu.Item>
-          <Button basic onClick={props.onSignout} primary>
-            Signout
-          </Button>
-        </Menu.Item>
-      </Menu.Menu>
-    )}
-  </Menu>
-);
+  return (
+    <Menu attached borderless>
+      <Menu.Item header as="h2">
+        Bookmarks
+      </Menu.Item>
+
+      {isAuthenticated && (
+        <Menu.Menu position="right">
+          <Menu.Item>
+            <Button basic onClick={onSignout} primary>
+              Signout
+            </Button>
+          </Menu.Item>
+        </Menu.Menu>
+      )}
+    </Menu>
+  );
+};
 
 export default Navbar;

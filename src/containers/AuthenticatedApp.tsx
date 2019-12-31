@@ -1,9 +1,14 @@
 import React from 'react';
 
-import Layout from '../components/Layout';
+import Layout from './Layout';
+import Bookmarks from './Bookmarks';
 
 const AuthenticatedApp: React.FC = () => {
-  return <Layout>Authenticated</Layout>;
+  return (
+    <Layout>
+      <Bookmarks />
+    </Layout>
+  );
 };
 
 export default AuthenticatedApp;

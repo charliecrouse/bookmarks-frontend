@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Dimmer, Loader, Segment } from 'semantic-ui-react';
 
-import Navbar from '../containers/Navbar';
+import Navbar from './Navbar';
 import { useAppStatus } from '../hooks/useAppStatus';
 
 const StyledContainer = styled.div`
@@ -17,6 +17,7 @@ const StyledMain = styled.div`
 `;
 
 const Layout: React.FC = props => {
+  const { children } = props;
   const { error, loading } = useAppStatus();
 
   return (
@@ -33,7 +34,7 @@ const Layout: React.FC = props => {
               {error.message || error}
             </Segment>
           )}
-          {props.children}
+          {children}
         </StyledMain>
       </>
     </StyledContainer>
