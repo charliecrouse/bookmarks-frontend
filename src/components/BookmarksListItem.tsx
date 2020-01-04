@@ -21,8 +21,8 @@ const BookmarksListItem: React.FC<BookmarksListItemProps> = props => {
   return (
     <Table.Row>
       <StyledBookmarkHeader onClick={() => onClick(bookmark)}>
-        <Header as="h3" image>
-          <Icon name={isFolder(bookmark) ? 'folder' : 'bookmark'} size="small" />
+        <Header image>
+          <Icon name={isFolder(bookmark) ? 'folder outline' : 'bookmark outline'} size="mini" />
           <Header.Content>{bookmark.name}</Header.Content>
         </Header>
       </StyledBookmarkHeader>
