@@ -26,6 +26,7 @@ const Bookmarks: React.FC<BookmarksProps> = props => {
           <BookmarksBreadcrumbs parent={parent} bookmarks={bookmarks} onClick={onClick} />
         </Menu.Item>
       </Menu>
+
       <BookmarksDisplay bookmarks={children} onClick={onClick} />
     </>
   );
