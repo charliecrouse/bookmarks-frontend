@@ -12,10 +12,6 @@ interface BookmarksListProps {
 const BookmarksList: React.FC<BookmarksListProps> = props => {
   const { bookmarks, onClick } = props;
 
-  if (!bookmarks.length) {
-    return <Header>No bookmarks found :(</Header>;
-  }
-
   return (
     <Table>
       <Table.Body>
