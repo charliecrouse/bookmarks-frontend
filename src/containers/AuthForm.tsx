@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 
 import AuthForm from '../components/AuthForm';
 import { FormData } from '../common/forms';
-import { SignupRequest, SigninRequest } from '../services/auth';
 import { signup, signin } from '../store/actions/auth';
 
 export default function AuthFormContainer() {
@@ -11,10 +10,15 @@ export default function AuthFormContainer() {
   const dispatch = useDispatch();
 
   const onSubmit = (data: FormData) => {
+    const payload = {
+      email: data.email,
+      password: data.password,
+    };
+
     if (isSignup) {
-      return dispatch(signup(data as SignupRequest));
+      dispatch(signup(payload));
     } else {
-      dispatch(signin(data as SigninRequest));
+      dispatch(signin(payload));
     }
   };
 

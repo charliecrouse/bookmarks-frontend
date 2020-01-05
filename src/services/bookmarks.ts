@@ -50,7 +50,7 @@ export const createBookmark = async (props: CreateBookmarkRequest): Promise<Crea
 
 export interface UpdateBookmarkRequest {
   jwt: string;
-  bookmark: Bookmark;
+  bookmark: Partial<Bookmark>;
 }
 
 export const updateBookmark = async (props: UpdateBookmarkRequest): Promise<{}> => {

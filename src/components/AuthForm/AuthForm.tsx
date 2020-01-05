@@ -29,7 +29,9 @@ export const AuthForm: React.FC<AuthForm> = props => {
 
   return (
     <>
-      <Header>{isSignup ? 'Signup' : 'Signin'}</Header>
+      <Header as="h1" textAlign="center">
+        {isSignup ? 'Signup' : 'Signin'}
+      </Header>
 
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Controller
@@ -50,10 +52,9 @@ export const AuthForm: React.FC<AuthForm> = props => {
       </Form>
 
       <ErrorMessage name="email" errors={errors} as={<Segment inverted color="red" secondary />} />
-
       <ErrorMessage name="password" errors={errors} as={<Segment inverted color="red" secondary />} />
 
-      <Header>
+      <Header as="h3" textAlign="center">
         Switch to <AuthFormSwitcher onClick={onSwitch}>{isSignup ? 'signin' : 'signup'}</AuthFormSwitcher>
       </Header>
     </>
