@@ -1,26 +1,18 @@
 import React from 'react';
-import styled from 'styled-components';
 import * as yup from 'yup';
 import { Controller, ErrorMessage, useForm } from 'react-hook-form';
 import { Button, Form, Header, Segment } from 'semantic-ui-react';
 
-import { FormData } from '../common/forms';
+import { AuthFormSwitcher } from './Styled';
+import { FormData } from '../../common/forms';
 
-const StyledSwitcher = styled.span`
-  color: blue;
-  :hover {
-    border-bottom: 1px solid blue;
-    cursor: pointer;
-  }
-`;
-
-interface AuthFormProps {
+interface AuthForm {
   isSignup: boolean;
   onSwitch: () => void;
   onSubmit: (data: FormData) => void;
 }
 
-const AuthForm: React.FC<AuthFormProps> = props => {
+export const AuthForm: React.FC<AuthForm> = props => {
   const { isSignup, onSwitch, onSubmit } = props;
   const { control, errors, handleSubmit } = useForm({
     validationSchema: yup.object().shape({
@@ -62,10 +54,8 @@ const AuthForm: React.FC<AuthFormProps> = props => {
       <ErrorMessage name="password" errors={errors} as={<Segment inverted color="red" secondary />} />
 
       <Header>
-        Switch to <StyledSwitcher onClick={onSwitch}>{isSignup ? 'signin' : 'signup'}</StyledSwitcher>
+        Switch to <AuthFormSwitcher onClick={onSwitch}>{isSignup ? 'signin' : 'signup'}</AuthFormSwitcher>
       </Header>
     </>
   );
 };
-
-export default AuthForm;
