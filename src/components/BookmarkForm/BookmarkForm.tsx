@@ -13,7 +13,7 @@ interface BookmarkForm {
   // Switches between bookmark/folder (used when creating)
   onSwitch: () => void;
   // Function to use when submitting (either create or update bookmark)
-  onSubmit: (values: Partial<Bookmark>) => void;
+  onSubmit: (values: any) => void;
 }
 
 export const BookmarkForm: React.FC<BookmarkForm> = props => {

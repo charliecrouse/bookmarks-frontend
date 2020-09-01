@@ -2,17 +2,8 @@ import * as _ from 'lodash';
 import axios from 'axios';
 
 const http = axios.create({
-  baseURL: process.env.REACT_APP_BOOKMARKS_API || 'http://localhost:3000',
+  baseURL: process.env.REACT_APP_BOOKMARKS_API || 'http://localhost:8000',
 });
-
-export interface SigninRequest {
-  email: string;
-  password: string;
-}
-
-export interface SigninResponse {
-  jwt: string;
-}
 
 export interface SignupRequest {
   email: string;
@@ -26,11 +17,11 @@ export interface SignupResponse {
 export const signup = async (props: SignupRequest): Promise<SignupResponse> => {
   try {
     const res = await http.post('/signup', props);
-
-    const jwt: string | undefined = _.get(res, 'data.token.jwt');
+    const jwt: string = _.get(res, 'data.jwt');
 
     if (!jwt) {
-      throw new Error(`Failed to signin. The response is missing JWT!`);
+      const message = `Failed to signin. The response is missing a valid JWT!`;
+      return Promise.reject(message);
     }
 
     window.localStorage.setItem('jwt', jwt);
@@ -41,18 +32,23 @@ export const signup = async (props: SignupRequest): Promise<SignupResponse> => {
   }
 };
 
+export interface SigninRequest {
+  email: string;
+  password: string;
+}
+
+export interface SigninResponse {
+  jwt: string;
+}
+
 export const signin = async (props: SigninRequest): Promise<SigninResponse> => {
   try {
     const res = await http.post('/signin', props);
-
-    if (res.status !== 200) {
-      throw new Error(`Failed to signin -- got status ${res.status}!`);
-    }
-
-    const jwt: string | undefined = _.get(res, 'data.token.jwt');
+    const jwt: string | undefined = _.get(res, 'data.jwt');
 
     if (!jwt) {
-      throw new Error(`Failed to signin. The response is missing JWT!`);
+      const message = `Failed to signin. The response is missing a valid JWT!`;
+      return Promise.reject(message);
     }
 
     window.localStorage.setItem('jwt', jwt);

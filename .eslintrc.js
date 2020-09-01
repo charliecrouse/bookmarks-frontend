@@ -17,6 +17,7 @@ module.exports = {
   },
   rules: {
     'react/prop-types': 0,
+    'react-hooks/exhaustive-deps': 0,
     '@typescript-eslint/no-use-before-define': 0,
     '@typescript-eslint/explicit-function-return-type': 0,
   },

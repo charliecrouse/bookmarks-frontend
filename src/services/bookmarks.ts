@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Bookmark } from '../common/bookmarks';
 
 const http = axios.create({
-  baseURL: process.env.REACT_APP_BOOKMARKS_API || 'http://localhost:3000',
+  baseURL: process.env.REACT_APP_BOOKMARKS_API || 'http://localhost:8000',
 });
 
 export interface FetchBookmarksRequest {
@@ -18,7 +18,7 @@ export interface FetchBookmarksResponse {
 export const fetchBookmarks = async (props: FetchBookmarksRequest): Promise<FetchBookmarksResponse> => {
   try {
     const res = await http.get(`/bookmarks?jwt=${props.jwt}`);
-    return res.data;
+    return { bookmarks: res.data };
   } catch (err) {
     const message = _.get(err, 'response.data.error') || _.get(err, 'message') || err;
     return Promise.reject(message);
@@ -41,7 +41,7 @@ export interface CreateBookmarkResponse {
 export const createBookmark = async (props: CreateBookmarkRequest): Promise<CreateBookmarkResponse> => {
   try {
     const res = await http.post(`/bookmarks?jwt=${props.jwt}`, props.bookmark);
-    return res.data;
+    return { bookmark: res.data };
   } catch (err) {
     const message = _.get(err, 'response.data.error') || _.get(err, 'message') || err;
     return Promise.reject(message);
@@ -53,10 +53,9 @@ export interface UpdateBookmarkRequest {
   bookmark: Partial<Bookmark>;
 }
 
-export const updateBookmark = async (props: UpdateBookmarkRequest): Promise<{}> => {
+export const updateBookmark = async (props: UpdateBookmarkRequest): Promise<void> => {
   try {
-    const res = await http.patch(`/bookmarks/${props.bookmark.id}?jwt=${props.jwt}`, props.bookmark);
-    return res.data;
+    await http.patch(`/bookmarks/${props.bookmark.id}?jwt=${props.jwt}`, props.bookmark);
   } catch (err) {
     const message = _.get(err, 'response.data.error') || _.get(err, 'message') || err;
     return Promise.reject(message);
@@ -68,10 +67,9 @@ export interface DeleteBookmarkRequest {
   bookmark: Bookmark;
 }
 
-export const deleteBookmark = async (props: DeleteBookmarkRequest): Promise<{}> => {
+export const deleteBookmark = async (props: DeleteBookmarkRequest): Promise<void> => {
   try {
-    const res = await http.delete(`/bookmarks/${props.bookmark.id}?jwt=${props.jwt}`);
-    return res.data;
+    await http.delete(`/bookmarks/${props.bookmark.id}?jwt=${props.jwt}`);
   } catch (err) {
     const message = _.get(err, 'response.data.error') || _.get(err, 'message') || err;
     return Promise.reject(message);
