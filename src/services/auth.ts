@@ -27,7 +27,7 @@ export const signup = async (props: SignupRequest): Promise<SignupResponse> => {
     window.localStorage.setItem('jwt', jwt);
     return { jwt };
   } catch (err) {
-    const message = _.get(err, 'response.data.error') || _.get(err, 'message') || err;
+    const message = _.get(err, 'response.data.message') || _.get(err, 'response.data.error') || _.get(err, 'message') || err;
     return Promise.reject(message);
   }
 };
@@ -54,7 +54,7 @@ export const signin = async (props: SigninRequest): Promise<SigninResponse> => {
     window.localStorage.setItem('jwt', jwt);
     return { jwt };
   } catch (err) {
-    const message = _.get(err, 'response.data.error') || _.get(err, 'message') || err;
+    const message = _.get(err, 'response.data.message') || _.get(err, 'response.data.error') || _.get(err, 'message') || err;
     return Promise.reject(message);
   }
 };

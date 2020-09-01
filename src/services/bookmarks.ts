@@ -20,7 +20,7 @@ export const fetchBookmarks = async (props: FetchBookmarksRequest): Promise<Fetc
     const res = await http.get(`/bookmarks?jwt=${props.jwt}`);
     return { bookmarks: res.data };
   } catch (err) {
-    const message = _.get(err, 'response.data.error') || _.get(err, 'message') || err;
+    const message = _.get(err, 'response.data.message') || _.get(err, 'response.data.error') || _.get(err, 'message') || err;
     return Promise.reject(message);
   }
 };
@@ -43,7 +43,7 @@ export const createBookmark = async (props: CreateBookmarkRequest): Promise<Crea
     const res = await http.post(`/bookmarks?jwt=${props.jwt}`, props.bookmark);
     return { bookmark: res.data };
   } catch (err) {
-    const message = _.get(err, 'response.data.error') || _.get(err, 'message') || err;
+    const message = _.get(err, 'response.data.message') || _.get(err, 'response.data.error') || _.get(err, 'message') || err;
     return Promise.reject(message);
   }
 };
@@ -57,7 +57,7 @@ export const updateBookmark = async (props: UpdateBookmarkRequest): Promise<void
   try {
     await http.patch(`/bookmarks/${props.bookmark.id}?jwt=${props.jwt}`, props.bookmark);
   } catch (err) {
-    const message = _.get(err, 'response.data.error') || _.get(err, 'message') || err;
+    const message = _.get(err, 'response.data.message') || _.get(err, 'response.data.error') || _.get(err, 'message') || err;
     return Promise.reject(message);
   }
 };
@@ -71,7 +71,7 @@ export const deleteBookmark = async (props: DeleteBookmarkRequest): Promise<void
   try {
     await http.delete(`/bookmarks/${props.bookmark.id}?jwt=${props.jwt}`);
   } catch (err) {
-    const message = _.get(err, 'response.data.error') || _.get(err, 'message') || err;
+    const message = _.get(err, 'response.data.message') || _.get(err, 'response.data.error') || _.get(err, 'message') || err;
     return Promise.reject(message);
   }
 };
