@@ -12,7 +12,7 @@ export const App: React.FC = () => {
 
   React.useEffect(() => {
     dispatch(loadAuthentication());
-  }, []);
+  }, [dispatch]);
 
   return auth.jwt ? <AuthenticatedApp /> : <AnonymousApp />;
 };
