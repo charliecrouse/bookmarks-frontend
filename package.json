@@ -25,7 +25,7 @@
     "semantic-ui-react": "^0.88.1",
     "styled-components": "^4.4.1",
     "typescript": "3.7.2",
-    "yup": "^0.28.0"
+    "yup": "^0.32.0"
   },
   "scripts": {
     "build": "react-scripts build",
@@ -55,7 +55,7 @@
     "@types/redux": "^3.6.0",
     "@types/redux-thunk": "^2.1.0",
     "@types/styled-components": "^4.4.0",
-    "@types/yup": "^0.26.27",
+    "@types/yup": "^0.32.0",
     "@typescript-eslint/eslint-plugin": "^2.9.0",
     "@typescript-eslint/parser": "^2.9.0",
     "eslint": "^6.7.1",
